@@ -5,7 +5,6 @@ const homeRouter = express.Router();
 
 homeRouter.get('/', (req, res) =>{
     res.sendFile(__dirname + "index");
-    console.log("sent");
 });
 
 module.exports = homeRouter;

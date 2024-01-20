@@ -210,4 +210,8 @@ function updateBagNum(){
     localStorage.setItem("bagNo", bagNum);
 }
 
-//
+//Add the onclick function for the pay now button
+function payNow(){
+    
+    window.location.href = "payment.html"
+}
