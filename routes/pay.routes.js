@@ -15,17 +15,19 @@ payRouter.post('/pay', (req, res) =>{
             headless: 'new'
         });
         const page = await browser.newPage();
-        const fileUrl = `file://${process.cwd()}/index.html`;
-        // await page.goto(fileUrl);
-        // const htmlContent = await page.content();
-        // console.log(htmlContent);
+        const fileUrl = `file://${process.cwd()}/payment.html`;
+        await page.goto(fileUrl);
 
-        // const $ = cheerio.load(htmlContent);
-        // const cart = $("div.cart-content");
-        res.sendFile(filePath);
-        //     console.log(cart);
+        const htmlContent = await page.content();
+        const $ = cheerio.load(htmlContent);
+        const cart = $("div.cart-content").html();
+        console.log(cart);
+        await page.goto(filePath);
+        const paymentPage = await page.content();
+        res.send(paymentPage);
 
-        // const modifiedHtml = $.html();
+        const modifiedHtml = $.html();
+        await browser.close();
             
     })();
       
