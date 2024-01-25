@@ -10,13 +10,19 @@ const cartTotalPrice = document.querySelector(".total-price");
 const payBtn = document.querySelector(".btn-buy");
 var ref;
 var amt;
+var cartItems
 
 function payBtnFunc(){
+    cartItems = localStorage.getItem("cartItems");
     var cartTotal = localStorage.getItem("cartTotal");
+    ref = ''+Math.floor((Math.random() * 1000000000) + 1);
     if (cartTotal) {
         amt = cartTotal;
     }
-    ref = ''+Math.floor((Math.random() * 1000000000) + 1);
+    if(cartItems){
+        cartItems = JSON.parse(cartItems);
+    }
+
 }
 
 if (cart){
@@ -231,4 +237,4 @@ if (cart){
 }
 
 payBtnFunc();
-export{ref, amt, payBtnFunc}
+export{ref, amt, payBtnFunc, cartItems}
