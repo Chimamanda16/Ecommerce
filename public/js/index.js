@@ -8,6 +8,7 @@ const closeCartBtn = document.querySelector(".close-cart");
 const nav = document.querySelector(".nav");
 const cartTotalPrice = document.querySelector(".total-price");
 const payBtn = document.querySelector(".btn-buy");
+
 var ref;
 var amt;
 var cartItems
@@ -237,4 +238,4 @@ if (cart){
 }
 
 payBtnFunc();
-export{ref, amt, payBtnFunc, cartItems}
+module.exports = {ref, amt, payBtnFunc, cartItems};
