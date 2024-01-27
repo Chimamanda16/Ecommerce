@@ -1,29 +1,23 @@
-const app = require("express");
-
-
-let {Cart, ref, price} = require("../public/js/exports");
-console.log(Cart, ref, price);
+const Cart = require("../models/payment.model");
 
 let success;
 
+module.exports.orderService = {
+    createOrder: async function(ref, price, cartItems){
 
-module.exports.createOrder = (req, res) => {
-
-    if(ref & price){
         const cart = new Cart({
             ID:ref,
             OrderedItems: cartItems,
             Price: price,
-            Status: Pending
+            Status: "Pending"
         });
         try {
             const newCart = cart.save();
-            res.status(201).json(newCart);
+            console.log(newCart);
         } catch (err) {
-            res.status(500).json({ message: err.message });
+            console.log(err);
         }
-    };
-
+    }
 }
 
 module.exports.sendOrder = async(req, res) =>{

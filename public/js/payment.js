@@ -1,4 +1,4 @@
-import {ref, amt} from "./index.js";
+import {ref, amt} from "./exports.js";
 
 const paymentForm = document.getElementById('paymentForm');
 paymentForm.addEventListener("submit", payWithPaystack, false);

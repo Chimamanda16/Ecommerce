@@ -7,26 +7,7 @@ const cartIcon = document.querySelector("#cart-icon");
 const closeCartBtn = document.querySelector(".close-cart");
 const nav = document.querySelector(".nav");
 const cartTotalPrice = document.querySelector(".total-price");
-const payBtn = document.querySelector(".btn-buy");
 
-var ref;
-var amt;
-var cartItems
-
-function payBtnFunc(){
-    cartItems = localStorage.getItem("cartItems");
-    var cartTotal = localStorage.getItem("cartTotal");
-    ref = ''+Math.floor((Math.random() * 1000000000) + 1);
-    if (cartTotal) {
-        amt = cartTotal;
-    }
-    if(cartItems){
-        cartItems = JSON.parse(cartItems);
-    }
-
-}
-
-if (cart){
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", ready);
     } else {
@@ -229,13 +210,4 @@ if (cart){
         localStorage.setItem("bagNo", bagNum);
     }
 
-    //Add the onclick function for the pay now button
-    payBtn.addEventListener("click", function(event){
-        payBtnFunc();
-        window.location.href = "payment.html";
-    });
-    
-}
-
-payBtnFunc();
-module.exports = {ref, amt, payBtnFunc, cartItems};
+  
