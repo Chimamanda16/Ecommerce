@@ -18,7 +18,7 @@ function payWithPaystack(e) {
         callback: function(response){
             let message = 'Payment complete! Reference: ' + response.reference;
             alert(message);
-            if (response.data.status === 'success') {
+            if (response.status === 'success') {
               fetch("/pay", {
                 method: "get",
                 headers: new Headers({"content-Type": "application/json"}),
