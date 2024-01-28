@@ -6,9 +6,8 @@ document.getElementById("amount").innerText = amt;
 
 function payWithPaystack(e) {
     e.preventDefault();
-    console.log(ref);
     let handler = PaystackPop.setup({
-        key: process.env.paystackKey, // Replace with your public key
+        key: 'pk_test_68f7973b53eb29db78b0e49928c4fc8a3a3d37b4', // Replace with your public key
         currency: "NGN",
         email: document.getElementById("email-address").value,
         amount: amt * 100,
@@ -19,7 +18,6 @@ function payWithPaystack(e) {
         callback: function(response){
             let message = 'Payment complete! Reference: ' + response.reference;
             alert(message);
-            console.log(response);
             if (response.data.status === 'success') {
               fetch("/pay", {
                 method: "get",
@@ -28,7 +26,6 @@ function payWithPaystack(e) {
             .then((res) =>{
                 res.json();
             })
-            .then((data)=>{})
             .catch((error) =>{
                 console.error(error);
             });
