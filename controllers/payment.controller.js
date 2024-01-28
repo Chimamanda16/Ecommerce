@@ -1,34 +1,35 @@
 const Cart = require("../models/payment.model");
 
-let success;
-
 module.exports.orderService = {
     createOrder: async function(ref, price, cartItems){
-
         const cart = new Cart({
-            ID:ref,
+            OrderID: ref,
             OrderedItems: cartItems,
             Price: price,
             Status: "Pending"
         });
         try {
-            const newCart = cart.save();
-            console.log(newCart);
+            cart.save();
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
-    }
-}
+    },
 
-module.exports.sendOrder = async(req, res) =>{
-
-    if(success){
+    sendOrder: async function(ref){
+        console.log("level 1");
         try{
-            const response = await Login.findOne({Email: username});
-            res.send(response);
+            console.log("level 2");
+            Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"});
+
+            Cart.findOne({OrderID: ref})
+            .then(function(response){
+                console.log(response);        
+            });
+                
         }
         catch(error){
             console.error(error);
         }
     }
+
 }

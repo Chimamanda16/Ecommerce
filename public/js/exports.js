@@ -20,7 +20,6 @@ if(payBtn){
     //Add the onclick function for the pay now button
     payBtn.addEventListener("click", function(event){
         event.preventDefault();
-        console.log("clicked");
         payBtnFunc();
         fetch("/pay", {
             method: "post",
@@ -33,9 +32,6 @@ if(payBtn){
         })
         .then((res) =>{
             res.json();
-        })
-        .then((data)=>{
-            console.log(data);
         })
         .catch((error) =>{
             console.error(error);
