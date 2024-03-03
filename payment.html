@@ -11,19 +11,28 @@
     <form id="paymentForm" autocomplete="on">
         <div class="form-group">
           <label for="email-address">Email Address</label>
-          <input type="email" id="email-address" required />
+          <input type="email" id="email-address" required autocomplete="on"/>
         </div>
         <div class="form-group">
           <label for="amount">Amount</label>
-          <p type="tel" id="amount"></p>
+          <p type="tel" id="amount" autocomplete="on"></p>
         </div>
         <div class="form-group">
           <label for="first-name">First Name</label>
-          <input type="text" id="first-name" />
+          <input type="text" id="first-name" autocomplete="on"/>
+        </div>
+        <div class="form-group" style="margin-bottom: 15%;">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" autocomplete="on"/>
+        </div>
+        <h2>Billling details</h2>
+        <div class="form-group">
+          <label for="phone-number">Phone Number</label>
+          <input type="tel" id="phone-number" required autocomplete="on"/>
         </div>
         <div class="form-group">
-          <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" />
+          <label for="street-name">Street</label>
+          <input type="text" id="street-name" autocomplete="on"/>
         </div>
         <div class="form-submit">
           <button type="submit" onclick="payWithPaystack()"> Pay </button>

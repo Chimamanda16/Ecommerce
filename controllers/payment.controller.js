@@ -16,14 +16,19 @@ module.exports.orderService = {
     },
 
     sendOrder: async function(ref){
-        console.log("level 1");
         try{
             console.log("level 2");
-            Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"});
+            Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
+            .then(function(response){
+                console.log(response);
+            })
+            .catch(function(err){
+                console.error(err);
+            });
 
             Cart.findOne({OrderID: ref})
-            .then(function(response){
-                console.log(response);        
+            .then(function(response){   
+                     
             });
                 
         }

@@ -1,4 +1,4 @@
-import {ref, amt} from "./exports.js";
+import {ref, amt, cartItems} from "./exports.js";
 
 const paymentForm = document.getElementById('paymentForm');
 paymentForm.addEventListener("submit", payWithPaystack, false);
@@ -12,23 +12,26 @@ function payWithPaystack(e) {
         email: document.getElementById("email-address").value,
         amount: amt * 100,
         ref: ref,
+        metadata:{
+            billingDetails:{
+                phone: document.getElementById("phone-number").value,
+                street: document.getElementById("street-name").value,
+            },
+            orderDetails:{
+                OrderID: ref,
+                OrderedItems: cartItems,
+                Price: amt,
+            }
+        },
         onClose: function(){
             alert('Window closed.');
         },
         callback: function(response){
+            console.log(response);
             let message = 'Payment complete! Reference: ' + response.reference;
             alert(message);
             if (response.status === 'success') {
-              fetch("/pay", {
-                method: "get",
-                headers: new Headers({"content-Type": "application/json"}),
-            })
-            .then((res) =>{
-                res.json();
-            })
-            .catch((error) =>{
-                console.error(error);
-            });
+                console.log(response);
                 window.location.href = 'success.html';
             }
         }

@@ -28,7 +28,7 @@ if(payBtn){
                 items: cartItems,
                 ref: ref,
                 price: amt
-            }), 
+            }),
         })
         .then((res) =>{
             res.json();
