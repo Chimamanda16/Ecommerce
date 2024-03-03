@@ -4,6 +4,24 @@ const paymentForm = document.getElementById('paymentForm');
 paymentForm.addEventListener("submit", payWithPaystack, false);
 document.getElementById("amount").innerText = amt;
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch("/pay", {
+        method: "post",
+        headers: new Headers({"content-Type": "application/json"}),
+        body: JSON.stringify({
+            items: cartItems,
+            ref: ref,
+            price: amt
+        }),
+    })
+    .then((res) =>{
+        res.json();
+    })
+    .catch((error) =>{
+        console.error(error);
+    });
+});
+
 function payWithPaystack(e) {
     e.preventDefault();
     let handler = PaystackPop.setup({

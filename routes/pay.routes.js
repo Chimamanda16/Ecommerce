@@ -5,7 +5,6 @@ const payRouter = express.Router();
 const {orderService} = require("../controllers/payment.controller");
 const secret = process.env.secretkey;
 
-
 payRouter.post('/pay', (req, res) =>{
     ref = req.body.ref;
     const price = req.body.price;
@@ -13,7 +12,6 @@ payRouter.post('/pay', (req, res) =>{
     console.log(ref, price, cart);
     orderService.createOrder(ref, price, cart);
 });
-
 
 payRouter.post("/paystack/webhook", function(req, res){
         const event = req.body;
