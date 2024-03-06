@@ -1,28 +1,37 @@
 //Get request for the main page
+const crypto = require("crypto");
+const express = require("express");
 require("dotenv").config();
-const express = require('express');
 const payRouter = express.Router();
 const {orderService} = require("../controllers/payment.controller");
-const secret = process.env.secretkey;
+const secretKey = process.env.secretKey;
+var ref;
 
 payRouter.post('/pay', (req, res) =>{
     ref = req.body.ref;
     const price = req.body.price;
     const cart = req.body.items;
-    console.log(ref, price, cart);
     orderService.createOrder(ref, price, cart);
 });
 
 payRouter.post("/paystack/webhook", function(req, res){
-        const event = req.body;
-        // Do something with event
+    const event = req.body;
+    const paystackSignature = req.headers["x-paystack-signature"];
+    const hash = crypto.createHmac('sha512', secretKey).update(JSON.stringify(event)).digest('hex');
+    if(hash == paystackSignature){
         if(event.event == "charge.success"){
             orderService.sendOrder(ref);
-            const metadata = req.body.data.metadata;
-            sendToDashboard(metadata);
+            console.log("Charge successful");
         }
-    else{
-        console.log("Hash not equal");
+        else{
+            console.log("Customer not successfully charged!");
+        }
+        res.sendStatus(200)
+    }
+    else {
+        // Invalid signature, reject the request
+        console.error('Invalid signature. Webhook event rejected.');
+        res.sendStatus(403).end();
     }
 });
 

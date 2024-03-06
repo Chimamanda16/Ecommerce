@@ -17,10 +17,9 @@ module.exports.orderService = {
 
     sendOrder: async function(ref){
         try{
-            console.log("level 2");
             Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
             .then(function(response){
-                console.log(response);
+                console.log("Order status changed");
             })
             .catch(function(err){
                 console.error(err);
@@ -29,6 +28,9 @@ module.exports.orderService = {
             Cart.findOne({OrderID: ref})
             .then(function(response){   
                      
+            })
+            .catch(function(err){
+                console.error(err);
             });
                 
         }

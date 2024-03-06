@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function payWithPaystack(e) {
     e.preventDefault();
     let handler = PaystackPop.setup({
-        key: 'pk_test_68f7973b53eb29db78b0e49928c4fc8a3a3d37b4', // Replace with your public key
+        key: 'pk_test_68f7973b53eb29db78b0e49928c4fc8a3a3d37b4',
         currency: "NGN",
         email: document.getElementById("email-address").value,
         amount: amt * 100,
