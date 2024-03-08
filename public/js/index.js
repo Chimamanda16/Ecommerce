@@ -209,5 +209,3 @@ const cartTotalPrice = document.querySelector(".total-price");
         bag.setAttribute("data-quantity", bagNum);
         localStorage.setItem("bagNo", bagNum);
     }
-
-  

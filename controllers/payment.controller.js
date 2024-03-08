@@ -2,21 +2,28 @@ const Cart = require("../models/payment.model");
 
 module.exports.orderService = {
     createOrder: async function(ref, price, cartItems){
-        const cart = new Cart({
-            OrderID: ref,
-            OrderedItems: cartItems,
-            Price: price,
-            Status: "Pending"
-        });
-        try {
-            cart.save();
-        } catch (err) {
-            console.error(err);
+        try{
+            console.log("First ref: " + ref);
+            const cart = new Cart({
+                OrderID: ref,
+                OrderedItems: cartItems,
+                Price: price,
+                Status: "Pending"
+            });
+            try {
+                cart.save();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        catch(error){
+            console.error(error);
         }
     },
 
     sendOrder: async function(ref){
         try{
+            console.log("Second ref: " + ref);
             Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
             .then(function(response){
                 console.log("Order status changed");
