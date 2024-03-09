@@ -21,12 +21,12 @@ payRouter.post("/paystack/webhook", function(req, res){
     if(hash == paystackSignature){
         if(event.event == "charge.success"){
             orderService.sendOrder(ref);
-            console.log("Charge successful");
+            console.log("Charge successful"); 
         }
         else{
             console.log("Customer not successfully charged!");
         }
-        res.sendStatus(200)
+        res.sendStatus(200);
     }
     else {
         // Invalid signature, reject the request

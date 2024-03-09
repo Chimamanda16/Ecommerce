@@ -3,7 +3,6 @@ const Cart = require("../models/payment.model");
 module.exports.orderService = {
     createOrder: async function(ref, price, cartItems){
         try{
-            console.log("First ref: " + ref);
             const cart = new Cart({
                 OrderID: ref,
                 OrderedItems: cartItems,
@@ -23,7 +22,6 @@ module.exports.orderService = {
 
     sendOrder: async function(ref){
         try{
-            console.log("Second ref: " + ref);
             Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
             .then(function(response){
                 console.log("Order status changed");
