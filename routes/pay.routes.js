@@ -6,8 +6,10 @@ const payRouter = express.Router();
 const {orderService} = require("../controllers/payment.controller");
 const secretKey = process.env.secretKey;
 var ref;
+var customerMail;
 
 payRouter.post('/pay', (req, res) =>{
+    customerMail = req.body.email
     ref = req.body.ref;
     const price = req.body.price;
     const cart = req.body.items;
@@ -20,7 +22,7 @@ payRouter.post("/paystack/webhook", function(req, res){
     const hash = crypto.createHmac('sha512', secretKey).update(JSON.stringify(event)).digest('hex');
     if(hash == paystackSignature){
         if(event.event == "charge.success"){
-            orderService.sendOrder(ref);
+            orderService.sendOrder(ref, customerMail);
             console.log("Charge successful"); 
         }
         else{

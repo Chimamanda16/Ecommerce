@@ -3,6 +3,7 @@ import {ref, amt, cartItems} from "./exports.js";
 const paymentForm = document.getElementById('paymentForm');
 paymentForm.addEventListener("submit", payWithPaystack, false);
 document.getElementById("amount").innerText = amt;
+var customerMail = document.getElementById("email-address").value;
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch("/pay", {
@@ -11,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         body: JSON.stringify({
             items: cartItems,
             ref: ref,
-            price: amt
+            price: amt,
+            email: customerMail
         }),
     })
     .then((res) =>{
