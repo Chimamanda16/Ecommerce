@@ -2,7 +2,6 @@ const Cart = require("../models/payment.model");
 const nodemailer = require("nodemailer");
 const myMail = process.env.myMail
 const nodePass = process.env.emailPass;
-var mailBody;
 
 //Setting up Nodemailer
 const transporter = nodemailer.createTransport({
@@ -36,13 +35,21 @@ module.exports.orderService = {
         }
     },
 
-    
-    sendOrder: async function(ref){
+
+    sendOrder: async function(ref, email){
         try{
+            //Update order status to Success
             Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
             .then(function(response){
-                mailBody = response;
-                console.log("Order status changed");
+                console.log(response);
+            })
+            .catch(function(err){
+                console.error(err);
+            });
+            //Return order from db
+            Cart.findOne({OrderID: ref})
+            .then(function(response){   
+                const mailBody = JSON.stringify(response);
                 //Nodemailer Options
                 const mailOptions = {
                     from: {
@@ -63,15 +70,6 @@ module.exports.orderService = {
                     }
                 }
                 sendMail(transporter, mailOptions);
-
-            })
-            .catch(function(err){
-                console.error(err);
-            });
-
-            Cart.findOne({OrderID: ref})
-            .then(function(response){   
-                     
             })
             .catch(function(err){
                 console.error(err);
