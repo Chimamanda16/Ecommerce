@@ -24,11 +24,7 @@ module.exports.orderService = {
                 Price: price,
                 Status: "Pending"
             });
-            try {
-                cart.save();
-            } catch (err) {
-                console.error(err);
-            }
+            await cart.save();
         }
         catch(error){
             console.error(error);
@@ -39,7 +35,7 @@ module.exports.orderService = {
     sendOrder: async function(ref, email){
         try{
             //Update order status to Success
-            Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
+            await Cart.findOneAndUpdate({OrderID: ref},{Status: "Success"})
             .then(function(response){
                 console.log(response);
             })
@@ -47,7 +43,7 @@ module.exports.orderService = {
                 console.error(err);
             });
             //Return order from db
-            Cart.findOne({OrderID: ref})
+            await Cart.findOne({OrderID: ref})
             .then(function(response){   
                 const mailBody = JSON.stringify(response);
                 //Nodemailer Options

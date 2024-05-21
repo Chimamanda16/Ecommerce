@@ -7,8 +7,8 @@ var customerMail = document.getElementById("email-address").value;
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch("/pay", {
-        method: "post",
-        headers: new Headers({"content-Type": "application/json"}),
+        method: "POST",
+        headers: new Headers({"Content-Type": "application/json"}),
         body: JSON.stringify({
             items: cartItems,
             ref: ref,
