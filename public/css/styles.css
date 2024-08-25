@@ -115,14 +115,13 @@ section{
 
 .logo{
     color: var(--bg-color);
-    font-size: 1.1rem;
 }
 
 .nav{
     display: flex;
     justify-content: space-between;
     margin: auto;
-    padding: 4%;
+    padding: 3%;
     position: absolute;
     top: 0;
     width: 100%;
@@ -161,3 +160,23 @@ section{
 .total-title, .logo{
     font-weight: 600;
 }
+
+@media screen and (min-width:200px) and (max-width: 690px) { 
+    header{
+        margin-bottom: 100px;
+    }
+    img{
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .product-box{
+        width: 42%;
+    }
+    .section-title{
+        margin-bottom: 10px;
+    }
+}
+
+/* @media screen and (min-width: 1100px) {
+    @media screen and (min-width:200px) and (max-width: 690px) { @media (max-width: 890px) {  */
