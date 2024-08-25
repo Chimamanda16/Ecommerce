@@ -170,6 +170,12 @@ section{
         object-fit: cover;
         width: 100%;
     }
+    .cart{
+        width: 50%;
+    }
+    .cart-box img{
+        height: 100%;
+    }
     .product-box{
         width: 42%;
         margin-bottom: 15px;
